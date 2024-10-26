@@ -67,22 +67,22 @@ def create_custom_transaction():
 def print_report():
     conn = get_db_connection()
     report = get_transactions_report(conn)
-    print(f"{'STT':<5}{'Tên Thành Viên':<20}{'Ngày Sinh':<15}{'Địa Chỉ':<25}{'Tên Sách':<20}{'Ngày Mượn':<15}{'Trạng Thái':<10}")
+    print(f"{'STT':<5}{'Tên Thành Viên':<20}{'Ngày Sinh':<15}{'Địa Chỉ':<25}{'Tên Sách':<25}{'Ngày Mượn':<15}{'Trạng Thái':<10}")
     for idx, (name, birthdate, address, title, borrow_date, status) in enumerate(report, start=1):
         birthdate_str = birthdate.strftime('%Y-%m-%d') if birthdate else "N/A"
         borrow_date_str = borrow_date.strftime('%Y-%m-%d') if borrow_date else "N/A"
-        print(f"{idx:<5}{name:<20}{birthdate_str:<15}{address:<25}{title:<20}{borrow_date_str:<15}{status:<10}")
+        print(f"{idx:<5}{name:<20}{birthdate_str:<15}{address:<25}{title:<25}{borrow_date_str:<15}{status:<10}")
     conn.close()
 
 def print_today_transactions():
     conn = get_db_connection()
     transactions = get_today_transactions(conn)
     if transactions:
-        print(f"{'STT':<5}{'Tên Thành Viên':<20}{'Ngày Sinh':<15}{'Địa Chỉ':<15}{'Tên Sách':<20}{'Ngày Mượn':<15}{'Trạng Thái':<10}")
+        print(f"{'STT':<5}{'Tên Thành Viên':<20}{'Ngày Sinh':<15}{'Địa Chỉ':<25}{'Tên Sách':<25}{'Ngày Mượn':<15}{'Trạng Thái':<10}")
         for idx, (name, birthdate, address, title, borrow_date, status) in enumerate(transactions, start=1):
             birthdate_str = birthdate.strftime('%Y-%m-%d') if birthdate else "N/A"
             borrow_date_str = borrow_date.strftime('%Y-%m-%d') if borrow_date else "N/A"
-            print(f"{idx:<5}{name:<20}{birthdate_str:<15}{address:<15}{title:<20}{borrow_date_str:<15}{status:<10}")
+            print(f"{idx:<5}{name:<20}{birthdate_str:<15}{address:<25}{title:<25}{borrow_date_str:<15}{status:<10}")
     else:
         print("No transactions found for today.")
     conn.close()
